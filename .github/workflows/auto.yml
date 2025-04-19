@@ -30,14 +30,8 @@ jobs:
 
       - name: Call Dify Workflow
         run: |
-          echo "$DIFY_INPUTS" > payload.json
-          echo "====== Payload to Dify ======"
-          cat payload.json
-          echo "============================="
           echo "Calling Dify Workflow..."
-          SAFE_INPUTS="${DIFY_INPUTS}"
-          echo "DEBUG INPUTS = $SAFE_INPUTS"
           curl -v -X POST "${DIFY_BASE_URL}/workflows/run" \
             -H "Authorization: Bearer ${DIFY_TOKENS}" \
             -H "Content-Type: application/json" \
-            -d "${DIFY_INPUTS}"
+            -d '${DIFY_INPUTS}'

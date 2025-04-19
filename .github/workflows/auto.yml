@@ -31,13 +31,7 @@ jobs:
       - name: Call Dify Workflow
         run: |
           echo "Calling Dify Workflow..."
-
-          payload=$(jq -n --arg last_run_time "$LAST_RUN_TIME" '{inputs: {last_run_time: $last_run_time}}')
-
-          echo "Payload to send:"
-          echo "$payload"
-
           curl -v -X POST "${DIFY_BASE_URL}/workflows/run" \
             -H "Authorization: Bearer ${DIFY_TOKENS}" \
             -H "Content-Type: application/json" \
-            -d "$payload"
+            -d "{\"inputs\": ${DIFY_INPUTS}}"

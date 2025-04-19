@@ -34,4 +34,4 @@ jobs:
           curl -v -X POST "${DIFY_BASE_URL}/workflows/run" \
             -H "Authorization: Bearer ${DIFY_TOKENS}" \
             -H "Content-Type: application/json" \
-            -d '${DIFY_INPUTS}'
+            -d "${DIFY_INPUTS}"

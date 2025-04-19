@@ -30,6 +30,10 @@ jobs:
 
       - name: Call Dify Workflow
         run: |
+          echo "$DIFY_INPUTS" > payload.json
+          echo "====== Payload to Dify ======"
+          cat payload.json
+          echo "============================="
           echo "Calling Dify Workflow..."
           SAFE_INPUTS="${DIFY_INPUTS}"
           echo "DEBUG INPUTS = $SAFE_INPUTS"

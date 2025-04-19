@@ -2,7 +2,7 @@ name: Auto
 
 on:
   schedule:
-    - cron: "*/1 * * * *" # every 1 minute 
+    - cron: "*/5 * * * *" # every 5 minutes
   workflow_dispatch:
 
 env:
@@ -25,13 +25,9 @@ jobs:
   DifyWorkflow:
     runs-on: ubuntu-latest
     steps:
-      - name: Install jq
-        run: sudo apt-get update && sudo apt-get install -y jq
-
-      - name: Call Dify Workflow
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+      - name: Run Project
         run: |
-          echo "Calling Dify Workflow..."
-          curl -v -X POST "${DIFY_BASE_URL}/workflows/run" \
-            -H "Authorization: Bearer ${DIFY_TOKENS}" \
-            -H "Content-Type: application/json" \
-            -d "${DIFY_INPUTS}"
+          yarn
+          yarn workflowDify

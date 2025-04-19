@@ -25,9 +25,10 @@ jobs:
   DifyWorkflow:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2
-      - name: Run Project
+      - name: Call Dify Workflow
         run: |
-          yarn
-          yarn workflowDify
+          echo "Calling Dify Workflow..."
+          curl -s -X POST "${DIFY_BASE_URL}/v1/workflows/run" \
+            -H "Authorization: Bearer ${DIFY_TOKENS}" \
+            -H "Content-Type: application/json" \
+            -d "{\"inputs\": ${DIFY_INPUTS}}"

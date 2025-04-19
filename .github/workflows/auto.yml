@@ -30,5 +30,4 @@ jobs:
           echo "Calling Dify Workflow..."
           curl -s -X POST "${DIFY_BASE_URL}/workflows/run" \
             -H "Authorization: Bearer ${DIFY_TOKENS}" \
-            -H "Content-Type: application/json" \
-            -d "{\"inputs\": ${DIFY_INPUTS}}"
+            -H "Content-Type: application/json"

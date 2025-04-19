@@ -27,7 +27,6 @@ jobs:
     steps:
       - name: Call Dify Workflow
         run: |
-          echo "Calling Dify Workflow..."
           curl -s -X POST "${DIFY_BASE_URL}/workflows/run" \
             -H "Authorization: Bearer ${DIFY_TOKENS}" \
             -H "Content-Type: application/json"

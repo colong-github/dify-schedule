@@ -25,8 +25,19 @@ jobs:
   DifyWorkflow:
     runs-on: ubuntu-latest
     steps:
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
       - name: Call Dify Workflow
         run: |
-          curl -s -X POST "${DIFY_BASE_URL}/workflows/run" \
+          echo "Calling Dify Workflow..."
+
+          payload=$(jq -n --arg last_run_time "$LAST_RUN_TIME" '{inputs: {last_run_time: $last_run_time}}')
+
+          echo "Payload to send:"
+          echo "$payload"
+
+          curl -v -X POST "${DIFY_BASE_URL}/workflows/run" \
             -H "Authorization: Bearer ${DIFY_TOKENS}" \
-            -H "Content-Type: application/json"
+            -H "Content-Type: application/json" \
+            -d "$payload"
